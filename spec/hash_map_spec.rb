@@ -42,6 +42,18 @@ RSpec.describe HashMap do
   end
 
   describe "#has?" do
+    before do
+      @hash_map = subject
+      @hash_map.set("is a key", 1)
+    end
+
+    it "returns true when asking for an existing key" do
+      expect(@hash_map.has?("is a key")).to eql true
+    end
+
+    it "returns false when asking for a non-existent key" do
+      expect(@hash_map.has?("not a key")).to eql false
+    end
   end
 
   describe "#remove" do
