@@ -80,6 +80,31 @@ RSpec.describe HashMap do
   end
 
   describe "#length" do
+    it "returns 0 when hash is empty" do
+      hash_map = subject
+      expect(hash_map.length).to eql 0
+    end
+
+    it "returns 4 when hash contains 4 key-value pairs" do
+      num_of_pairs = 4
+      hash_map = subject
+      num_of_pairs.times { |key| hash_map.set(key.to_s, key) }
+      expect(hash_map.length).to eql num_of_pairs
+    end
+
+    it "returns 8 when hash contains 8 key-value pairs" do
+      num_of_pairs = 8
+      hash_map = subject
+      num_of_pairs.times { |key| hash_map.set(key.to_s, key) }
+      expect(hash_map.length).to eql num_of_pairs
+    end
+
+    it "returns 13 when hash contains 13 key-value pairs" do
+      num_of_pairs = 13
+      hash_map = subject
+      num_of_pairs.times { |key| hash_map.set(key.to_s, key) }
+      expect(hash_map.length).to eql num_of_pairs
+    end
   end
 
   describe "#clear" do
