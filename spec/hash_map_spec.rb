@@ -57,6 +57,26 @@ RSpec.describe HashMap do
   end
 
   describe "#remove" do
+    before do
+      @hash_map = subject
+      @hash_map.set("a", 1)
+      @hash_map.set("b", 2)
+      @hash_map.set("c", 3)
+      @hash_map.set("d", 4)
+    end
+
+    it "returns nil when removing a non-existent key" do
+      expect(@hash_map.remove("not a key")).to eql nil
+    end
+
+    it "returns the value associated with the key" do
+      expect(@hash_map.remove("b")).to eql 2
+    end
+
+    it "removes the key-value pair from the hash" do
+      @hash_map.remove "d"
+      expect(@hash_map.has?("d")).to eql false
+    end
   end
 
   describe "#length" do
