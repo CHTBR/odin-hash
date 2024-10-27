@@ -108,6 +108,15 @@ RSpec.describe HashMap do
   end
 
   describe "#clear" do
+    it "returns an empty hash when given an empty hash" do
+      expect(subject.clear.length).to eql 0
+    end
+
+    it "returns an empty hash when given a hash with pairs" do
+      hash_map = subject
+      5.times { |key| hash_map.set(key.to_s, key) }
+      expect(hash_map.clear.length).to eql 0
+    end
   end
 
   describe "#keys" do
