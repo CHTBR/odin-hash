@@ -17,6 +17,45 @@ RSpec.describe HashMap do
   end
 
   describe "#set" do
+    it "sets initial capacity to 16" do
+      exoect(subject.capacity).to eql 16
+    end
+
+    it "sets load factor to be between 0.75 and 1" do
+      expect(0.75 < subject.load_factor && subject.load_factor < 1).to eql true
+    end
+
+    it "adds the key-value pair to the hash" do
+      hash_map = subject
+      hash_map.set("key", "value")
+      expect(hash_map.entries).to eql [["key", "value"]]
+    end
+
+    it "overrides the key-value pair with the newest value" do
+      hash_map = subject
+      hash_map.set("key", "old value")
+      hash_map.set("key", "new value")
+      expect(subject.get("key")).to eql "new value"
+    end
+
+    it "adds two different key-value pairs even if they have the same hash" do
+      hash_map = subject
+      hash_map.capacity = 1
+      hash_map.load_factor = 3
+      hash_map.set("original key", 1)
+      hash_map.set("repeating hash", 2)
+      expect(hash_map.has?("repeating hash")).to eql true
+    end
+
+    context "when given more key-value pairs than load_factor*capacity" do
+      it "doubles capacity" do
+        hash_map = subject
+        init_capacity = hash_map.capacity
+        load_factor = hash_map.load_factor
+        (init_capacity*load_factor).ceil.times { |key| hash_map.set(key.to_s, key) }
+        expect(hash_map.capacity).to eql(init_capacity * 2)
+      end
+    end
   end
 
   describe "#get" do
