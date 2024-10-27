@@ -20,6 +20,25 @@ RSpec.describe HashMap do
   end
 
   describe "#get" do
+    before do
+      @hash_map = subject
+      @hash_map.set("a", 1)
+      @hash_map.set("b", 2)
+      @hash_map.set("c", 3)
+      @hash_map.set("d", 4)
+    end
+
+    it "returns the value associated with the key a" do
+      expect(@hash_map.get("a")).to eql 1
+    end
+
+    it "returns the value associated with the key c" do
+      expect(@hash_map.get("c")).to eql 3
+    end
+
+    it "returns nil when asking for a non-existent key" do
+      expect(@hash_map.get("not a key")).to eql nil
+    end
   end
 
   describe "#has?" do
