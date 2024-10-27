@@ -22,7 +22,7 @@ RSpec.describe HashMap do
     end
 
     it "sets load factor to be between 0.75 and 1" do
-      expect(0.75 < subject.load_factor && subject.load_factor < 1).to eql true
+      expect(subject.load_factor < 1 && subject.load_factor > 0.75).to eql true
     end
 
     it "adds the key-value pair to the hash" do
@@ -52,7 +52,7 @@ RSpec.describe HashMap do
         hash_map = subject
         init_capacity = hash_map.capacity
         load_factor = hash_map.load_factor
-        (init_capacity*load_factor).ceil.times { |key| hash_map.set(key.to_s, key) }
+        (init_capacity * load_factor).ceil.times { |key| hash_map.set(key.to_s, key) }
         expect(hash_map.capacity).to eql(init_capacity * 2)
       end
     end
