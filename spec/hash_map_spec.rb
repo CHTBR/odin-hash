@@ -1,5 +1,5 @@
 require "rspec"
-require_relative "lib/hash_map"
+require_relative "../lib/hash_map"
 
 RSpec.describe HashMap do
   describe "#hash" do
