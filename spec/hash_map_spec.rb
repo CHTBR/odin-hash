@@ -135,6 +135,18 @@ RSpec.describe HashMap do
   end
 
   describe "#values" do
+    it "returns an empty array when given an empty hash" do
+      expect(subject.values).to eql []
+    end
+
+    it "returns [1, 2, 3, 4] when given a hash with these values" do
+      hash_map = subject
+      hash_map.set("a", 1)
+      hash_map.set("b", 2)
+      hash_map.set("c", 3)
+      hash_map.set("d", 4)
+      expect(hash_map.values).to eql [1, 2, 3, 4]
+    end
   end
 
   describe "#entries" do
