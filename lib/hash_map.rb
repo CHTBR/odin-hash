@@ -3,6 +3,10 @@ class HashMap
   attr_accessor :capacity, :load_factor
 
   def hash(string)
+    hash = 0
+    prime = 31
+    string.each_char { |char| hash = hash * prime + char.ord }
+    hash
   end
 
   def set(key, value)
