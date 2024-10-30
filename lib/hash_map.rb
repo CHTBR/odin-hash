@@ -8,6 +8,7 @@ class HashMap
     @capacity = 16
     @load_factor = 0.8
     @buckets = Array.new(@capacity) { LinkedList.new }
+    @size = 0
   end
 
   def hash(string)
@@ -24,11 +25,13 @@ class HashMap
     key_value_pair = bucket.any { |arr| arr[0] == key }
     if key_value_pair.nil?
       bucket.append([key, value])
+      @size += 1
     else
       list_index = bucket.find key_value_pair
       bucket.remove_at(list_index)
       bucket.insert_at(list_index, [key, value])
     end
+    _double_bucket_number if @size > (@capacity * @load_factor)
   end
 
   def get(key)
@@ -70,5 +73,15 @@ class HashMap
       bucket.entries.each { |entry| entries.append entry }
     end
     entries
+  end
+
+  private
+
+  def _double_bucket_number
+    entries = entries()
+    @capacity *= 2
+    @size = 0
+    @buckets = Array.new(@capacity) { LinkedList.new }
+    entries.each { |entry| set(entry[0], entry[1]) }
   end
 end
