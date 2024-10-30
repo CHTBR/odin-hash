@@ -145,31 +145,31 @@ class LinkedList
   end
 
   def any?
-    return false if head.nil?
+    return nil if head.nil?
 
     index = 0
     current_node = @head_address
     until current_node.next_address.nil?
-      return true if yield(current_node.data, index)
+      return current_node.data if yield(current_node.data, index)
 
       current_node = current_node.next_address
       index += 1
     end
-    return true if yield current_node.data
+    return current_node.data if yield(current_node.data, index)
 
-    false
+    nil
   end
 
   def entries
     entries = []
 
     unless @head_address.nil?
-      current_node = @head_address
-      until current_node.next_address.nil?
-        entries.append(current_node.data)
-        current_node = current_node.next_address
-      end
+    current_node = @head_address
+    until current_node.next_address.nil?
       entries.append(current_node.data)
+      current_node = current_node.next_address
+    end
+    entries.append(current_node.data)
     end
     entries
   end
