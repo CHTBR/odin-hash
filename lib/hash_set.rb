@@ -18,18 +18,13 @@ class HashSet
     hash
   end
 
-  def set(key, value)
-    hash_code = hash(key)
+  def set(value)
+    hash_code = hash(value)
     bucket_index = hash_code % capacity
     bucket = @buckets[bucket_index]
-    key_value_pair = bucket.any { |arr| arr[0] == key }
-    if key_value_pair.nil?
-      bucket.append([key, value])
+    unless bucket.contains?(value)
+      bucket.append(value)
       @size += 1
-    else
-      list_index = bucket.find key_value_pair
-      bucket.remove_at(list_index)
-      bucket.insert_at(list_index, [key, value])
     end
     _double_bucket_number if @size > (@capacity * @load_factor)
   end
@@ -100,6 +95,6 @@ class HashSet
     @capacity *= 2
     @size = 0
     @buckets = Array.new(@capacity) { LinkedList.new }
-    entries.each { |entry| set(entry[0], entry[1]) }
+    entries.each { |entry| set entry }
   end
 end
