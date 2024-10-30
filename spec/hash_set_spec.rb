@@ -88,7 +88,7 @@ RSpec.describe HashSet do
     end
 
     it "returns the value" do
-      expect(@hash_set.remove("b")).to eql 2
+      expect(@hash_set.remove("b")).to eql "b"
     end
 
     it "removes the value from the hash" do
