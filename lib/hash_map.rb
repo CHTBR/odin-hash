@@ -67,9 +67,14 @@ class HashMap
   end
 
   def length
+    @size
   end
 
   def clear
+    @size = 0
+    @capacity = 16
+    @buckets = Array.new(@capacity) { LinkedList.new }
+    self
   end
 
   def keys
