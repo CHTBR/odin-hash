@@ -39,12 +39,11 @@ class HashSet
     nil
   end
 
-  def has?(key)
-    hash_code = hash(key)
+  def has?(value)
+    hash_code = hash(value)
     bucket_index = hash_code % capacity
     bucket = @buckets[bucket_index]
-    key_value_pair = bucket.any { |arr| arr[0] == key }
-    !key_value_pair.nil?
+    bucket.contains? value
   end
 
   def remove(key)
