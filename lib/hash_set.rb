@@ -29,16 +29,6 @@ class HashSet
     _double_bucket_number if @size > (@capacity * @load_factor)
   end
 
-  def get(key)
-    hash_code = hash(key)
-    bucket_index = hash_code % @capacity
-    bucket = @buckets[bucket_index]
-    key_value_pair = bucket.any { |arr| arr[0] == key }
-    return key_value_pair[1] unless key_value_pair.nil?
-
-    nil
-  end
-
   def has?(value)
     hash_code = hash(value)
     bucket_index = hash_code % capacity
@@ -46,18 +36,17 @@ class HashSet
     bucket.contains? value
   end
 
-  def remove(key)
-    hash_code = hash(key)
+  def remove(value)
+    hash_code = hash(value)
     bucket_index = hash_code % capacity
     bucket = @buckets[bucket_index]
-    key_value_pair = bucket.any { |arr| arr[0] == key }
-    if key_value_pair.nil?
-      return nil
-    else
+    if bucket.contains? value
       @size -= 1
-      list_index = bucket.find(key_value_pair)
-      return bucket.remove_at(list_index)[1]
+      list_index = bucket.find value
+      return bucket.remove_at(list_index)
     end
+
+    nil
   end
 
   def length
