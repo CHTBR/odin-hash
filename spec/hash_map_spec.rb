@@ -18,7 +18,7 @@ RSpec.describe HashMap do
 
   describe "#set" do
     it "sets initial capacity to 16" do
-      exoect(subject.capacity).to eql 16
+      expect(subject.capacity).to eql 16
     end
 
     it "sets load factor to be between 0.75 and 1" do
