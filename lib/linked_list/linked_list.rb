@@ -144,18 +144,16 @@ class LinkedList
     deleted_node.data
   end
 
-  def any?
+  def any
     return nil if head.nil?
 
-    index = 0
     current_node = @head_address
     until current_node.next_address.nil?
-      return current_node.data if yield(current_node.data, index)
+      return current_node.data if yield current_node.data
 
       current_node = current_node.next_address
-      index += 1
     end
-    return current_node.data if yield(current_node.data, index)
+    return current_node.data if yield current_node.data
 
     nil
   end

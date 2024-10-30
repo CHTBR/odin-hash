@@ -13,7 +13,7 @@ class HashMap
   def hash(string)
     hash = 0
     prime = 31
-    string.each_char { |char| hash = hash * prime + char.ord }
+    string.each_char { |char| hash = (hash * prime) + char.ord }
     hash
   end
 
@@ -21,19 +21,11 @@ class HashMap
     hash_code = hash(key)
     bucket_index = hash_code % capacity
     bucket = @buckets[bucket_index]
-
-    list_index = nil
-    bucket.any? do |arr, index|
-      if arr[0] == key
-        list_index = index
-        return true
-      end
-      false
-    end
-
-    if list_index.nil?
+    key_value_pair = bucket.any { |arr| arr[0] == key }
+    if key_value_pair.nil?
       bucket.append([key, value])
     else
+      list_index = bucket.find key_value_pair
       bucket.remove_at(list_index)
       bucket.insert_at(list_index, [key, value])
     end
@@ -43,7 +35,7 @@ class HashMap
     hash_code = hash(key)
     bucket_index = hash_code % @capacity
     bucket = @buckets[bucket_index]
-    key_value_pair = bucket.any? { |arr| arr[0] == key ? true : false }
+    key_value_pair = bucket.any { |arr| arr[0] == key }
     return key_value_pair[1] unless key_value_pair.nil?
 
     nil
