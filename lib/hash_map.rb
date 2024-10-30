@@ -53,6 +53,17 @@ class HashMap
   end
 
   def remove(key)
+    hash_code = hash(key)
+    bucket_index = hash_code % capacity
+    bucket = @buckets[bucket_index]
+    key_value_pair = bucket.any { |arr| arr[0] == key }
+    if key_value_pair.nil?
+      return nil
+    else
+      @size -= 1
+      list_index = bucket.find(key_value_pair)
+      return bucket.remove_at(list_index)[1]
+    end
   end
 
   def length
