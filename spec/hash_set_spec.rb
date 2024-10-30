@@ -144,11 +144,11 @@ RSpec.describe HashSet do
 
     it "returns [\"a\", \"b\", \"c\", \"d\"] when given a hash with these values" do
       hash_set = subject
-      hash_set.set("a", 1)
-      hash_set.set("b", 2)
-      hash_set.set("c", 3)
-      hash_set.set("d", 4)
-      expect(hash_set.entries).to eql [["a", 1], ["b", 2], ["c", 3], ["d", 4]]
+      hash_set.set("a")
+      hash_set.set("b")
+      hash_set.set("c")
+      hash_set.set("d")
+      expect(hash_set.entries).to eql %w[a b c d]
     end
   end
 end
