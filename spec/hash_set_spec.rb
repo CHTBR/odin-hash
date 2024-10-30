@@ -113,14 +113,14 @@ RSpec.describe HashSet do
     it "returns 8 when hash contains 8 values" do
       num_of_pairs = 8
       hash_set = subject
-      num_of_pairs.times { |key| hash_set.set(key.to_s, key) }
+      num_of_pairs.times { |key| hash_set.set(key.to_s) }
       expect(hash_set.length).to eql num_of_pairs
     end
 
     it "returns 13 when hash contains 13 values" do
       num_of_pairs = 13
       hash_set = subject
-      num_of_pairs.times { |key| hash_set.set(key.to_s, key) }
+      num_of_pairs.times { |key| hash_set.set(key.to_s) }
       expect(hash_set.length).to eql num_of_pairs
     end
   end
