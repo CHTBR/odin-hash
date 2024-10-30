@@ -40,6 +40,14 @@ RSpec.describe HashSet do
       expect(hash_set.has?("repeating hash")).to eql true
     end
 
+    it "doesn't add the same value twice" do
+      hash_set = subject
+      hash_set.set "value"
+      hash_set.set "different value"
+      hash_set.set "value"
+      expect(hash_set.length).to eql 2
+    end
+
     context "when given more values than load_factor*capacity" do
       it "doubles capacity" do
         hash_set = subject
