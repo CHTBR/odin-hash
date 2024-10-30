@@ -60,14 +60,6 @@ class HashSet
     self
   end
 
-  def keys
-    entries.reduce([]) { |acc, entry| acc << entry[0] }
-  end
-
-  def values
-    entries.reduce([]) { |acc, entry| acc << entry[1] }
-  end
-
   def entries
     entries = []
     @buckets.each do |bucket|

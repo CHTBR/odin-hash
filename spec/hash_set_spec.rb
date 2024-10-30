@@ -53,7 +53,7 @@ RSpec.describe HashSet do
         hash_set = subject
         init_capacity = hash_set.capacity
         load_factor = hash_set.load_factor
-        (init_capacity * load_factor).ceil.times { |key| hash_set.set(key.to_s) }
+        (init_capacity * load_factor).ceil.times { |value| hash_set.set(value.to_s) }
         expect(hash_set.capacity).to eql(init_capacity * 2)
       end
     end
@@ -84,7 +84,7 @@ RSpec.describe HashSet do
     end
 
     it "returns nil when removing a non-existent value" do
-      expect(@hash_set.remove("not a key")).to eql nil
+      expect(@hash_set.remove("not a value")).to eql nil
     end
 
     it "returns the value" do
@@ -106,21 +106,21 @@ RSpec.describe HashSet do
     it "returns 4 when hash contains 4 values" do
       num_of_pairs = 4
       hash_set = subject
-      num_of_pairs.times { |key| hash_set.set(key.to_s) }
+      num_of_pairs.times { |value| hash_set.set(value.to_s) }
       expect(hash_set.length).to eql num_of_pairs
     end
 
     it "returns 8 when hash contains 8 values" do
       num_of_pairs = 8
       hash_set = subject
-      num_of_pairs.times { |key| hash_set.set(key.to_s) }
+      num_of_pairs.times { |value| hash_set.set(value.to_s) }
       expect(hash_set.length).to eql num_of_pairs
     end
 
     it "returns 13 when hash contains 13 values" do
       num_of_pairs = 13
       hash_set = subject
-      num_of_pairs.times { |key| hash_set.set(key.to_s) }
+      num_of_pairs.times { |value| hash_set.set(value.to_s) }
       expect(hash_set.length).to eql num_of_pairs
     end
   end
@@ -132,7 +132,7 @@ RSpec.describe HashSet do
 
     it "returns an empty hash when given a hash values" do
       hash_set = subject
-      5.times { |key| hash_set.set(key.to_s) }
+      5.times { |value| hash_set.set(value.to_s) }
       expect(hash_set.clear.length).to eql 0
     end
   end
