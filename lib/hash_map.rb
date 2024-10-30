@@ -21,22 +21,32 @@ class HashMap
     hash_code = hash(key)
     bucket_index = hash_code % capacity
     bucket = @buckets[bucket_index]
+
     list_index = nil
-    if bucket.any? do |arr, index|
+    bucket.any? do |arr, index|
       if arr[0] == key
         list_index = index
         return true
       end
       false
     end
+
+    if list_index.nil?
+      bucket.append([key, value])
+    else
       bucket.remove_at(list_index)
       bucket.insert_at(list_index, [key, value])
-    else
-      bucket.append([key, value])
     end
   end
 
   def get(key)
+    hash_code = hash(key)
+    bucket_index = hash_code % @capacity
+    bucket = @buckets[bucket_index]
+    key_value_pair = bucket.any? { |arr| arr[0] == key ? true : false }
+    return key_value_pair[1] unless key_value_pair.nil?
+
+    nil
   end
 
   def has?(key)
