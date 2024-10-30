@@ -42,6 +42,11 @@ class HashMap
   end
 
   def has?(key)
+    hash_code = hash(key)
+    bucket_index = hash_code % capacity
+    bucket = @buckets[bucket_index]
+    key_value_pair = bucket.any { |arr| arr[0] == key }
+    !key_value_pair.nil?
   end
 
   def remove(key)
